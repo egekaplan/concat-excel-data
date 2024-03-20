@@ -1,5 +1,5 @@
 .venv
-/files_here
+files_here/**
 cached_df.pkl
 file_size_bar_chart.png
 

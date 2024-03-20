@@ -16,7 +16,7 @@ excel_files = []
 if os.path.exists(folder_path) and os.path.isdir(folder_path):
     files_in_folder = os.listdir(folder_path)
 
-    print("Filenames in the '{}' folder:".format(folder_name))
+    print("Reading files in '{}' folder:".format(folder_name))
     for filename in files_in_folder:
         excel_files.append(filename)
 else:
