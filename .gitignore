@@ -1,6 +1,31 @@
-.venv
-files_here/**
-cached_df.pkl
-file_size_bar_chart.png
+# Ignore Python cache files
+__pycache__/
 
-.venv
+# Ignore report files in src/files_here/
+src/files_here/Files_Report_*.xlsx
+
+# Ignore cached_df.pkl in src/cached_df/
+src/cached_df/cached_df.pkl
+
+# Ignore virtual environment directory
+.venv/
+
+# Ignore any generated files
+*.png
+test_values.py
+
+# Ignore any compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore editor files
+*.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+
+# Ignore system files
+.DS_Store
+Thumbs.db
