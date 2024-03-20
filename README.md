@@ -5,23 +5,35 @@ This project demonstrates how to read multiple Excel files from a specific direc
 ## Project Structure
 
 ```
-├── README.md
-├── files_here
-│   ├── 
-├── get_data.py
-├── plot_graph.py
-└── requirements.txt
+├── README.md│   
+├── requirements.txt
+├── src
+│   │   
+│   ├── cached_df
+│   │   └── .gitkeep
+│   ├── data_visualization
+│   │   └── .gitkeep
+│   │   
+│   ├── files_here
+│   │   └── .gitkeep
+│   ├── get_data.py
+│   └── plot_graph.py
+└── .gitignore
 ```
 
 ### Files Description
 
-- `get_data.py`: Python script to read Excel files from the `files_here` directory, concatenate them into a single DataFrame, and cache the result.
+- `get_data.py`: Python script to read Excel files from the `src/files_here` directory, concatenate them into a single DataFrame, and cache the result.
 
 - `plot_graph.py`: Python script to plot the distribution of file sizes from the concatenated DataFrame and save the plot as a PNG file.
 
+- `src/files_here/`: Directory containing Excel files to read
+
 - `cached_df.pkl`: Pickle file storing the cached DataFrame after concatenation.
 
-- `files_here/`: Directory containing sample Excel files for demonstration.
+- `src/cached_df/`: Directory containing pickled DataFrame after concatenation.
+
+- `src/data_visualization/`: Directory for generated graphs
 
 ## Setup and Execution
 
@@ -44,21 +56,21 @@ This project demonstrates how to read multiple Excel files from a specific direc
 
 ### Usage
 
-1. Ensure your Excel files are placed in the `files_here` directory.
+1. Ensure your Excel files are placed in the `src/files_here` directory.
 
-2. Run `get_data.py` to read and concatenate the Excel files:
+2. Run `src/get_data.py` to read and concatenate the Excel files:
    ```bash
-   python get_data.py
+   python3 get_data.py
    ```
 
-   This will generate a cached DataFrame `cached_df.pkl`.
+   This will generate a cached DataFrame `cached_df.pkl` in `src/cached_df/cached_df.pkl`.
 
-3. Run `plot_graph.py` to plot the size distribution of the files:
+3. Run `src/plot_graph.py` to plot the size distribution of the files:
    ```bash
-   python plot_graph.py
+   python3 plot_graph.py
    ```
 
-   The resulting bar chart will be saved as `file_size_bar_chart.png`.
+   The resulting histogram chart will be saved as `file_size_histogram.png` and `extension_frequency_histogram`.
 
 ## Notes
 
