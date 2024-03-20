@@ -1,6 +1,6 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import os
+import pandas as pd
+import pickle
 
 # Get pwd, current directory
 current_folder = os.getcwd()
@@ -22,17 +22,18 @@ if os.path.exists(folder_path) and os.path.isdir(folder_path):
 else:
     print("Folder '{}' does not exist or is not a directory.".format(folder_name))
 
-print(f"files to read: {excel_files}")
+print(f"Files to read: {excel_files}")
 
 # My static excel df start column, also sheet name... you may change as u wish
-sheet_name = "Sayfa1"  
-header_row = 9  
+sheet_name = "Files"
+header_row = 9
 
 def read_excel_file(file):
-    """read single excel data, generate df
+    """Read single excel data, generate df
     """
     try:
-        df = pd.read_excel(f"{folder_path}/{file}", sheet_name=sheet_name, header=header_row-1, index_col=1, engine='openpyxl')
+        df = pd.read_excel(f"{folder_path}/{file}", sheet_name=sheet_name,
+                           header=header_row-1, index_col=1, engine='openpyxl')
     except FileNotFoundError:
         print(f"Error: File '{file}' not found.")
         return None
@@ -42,7 +43,7 @@ def read_excel_file(file):
     return df
 
 def read_concat_excel_files(files):
-    """concat df's
+    """Concat df's
     """
     dfs = []
     for file in files:
@@ -53,7 +54,17 @@ def read_concat_excel_files(files):
     concatenated_df = pd.concat(dfs)
     return concatenated_df
 
-# Concat all dfs in "files_here" folder into a single df (for excel cells B9 to H9 incl. headers)
-concatenated_df = read_concat_excel_files(excel_files)
+# Check if cached file exists
+cached_file = "cached_df.pkl"
+if os.path.exists(cached_file):
+    print("Loading DataFrame from cache...")
+    with open(cached_file, "rb") as f:
+        concatenated_df = pickle.load(f)
+else:
+    print("Cached DataFrame not found. Generating and caching...")
+    concatenated_df = read_concat_excel_files(excel_files)
+    with open(cached_file, "wb") as f:
+        pickle.dump(concatenated_df, f)
 
 print(concatenated_df)
+
